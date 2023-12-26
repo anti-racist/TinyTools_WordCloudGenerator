@@ -1,0 +1,60 @@
+body {
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  textarea#textInput {
+    width: calc(100%); /* Full width minus padding */
+    height: 100px;
+    margin: 10px 0;
+    padding: 5px;
+    border: 1px solid #ccc; /* Consistent with the container */
+    box-sizing: border-box; /* Includes padding and border in the width */
+  }
+  
+  button#generateBtn {
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    background-color: #87ae73; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Adds a subtle shadow */
+    transition: background-color 0.3s; /* Smooth transition for color change */
+  }
+  
+  button#generateBtn:hover,
+  button#generateBtn:active,
+  button#generateBtn:focus {
+    background-color: #009473; 
+    outline: none; /* Removes the outline on focus */
+  }
+  
+  #wordCloudContainer {
+    border: 1px solid #ccc; /* Adds a light grey border */
+    min-height: 500px; /* Gives the container a starting height */
+    width: 100%;
+    margin-top: 10px;
+    overflow: auto; /* Adds scrollbars if necessary */
+    position: relative;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Responsive design adjustments */
+  @media (max-width: 900px) {
+    body, html {
+      min-width: 600px;
+    }
+  }
+  
+  /* Align all the elements in a column */
+  #popup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Aligns the children width to match the parent */
+  }
+  
