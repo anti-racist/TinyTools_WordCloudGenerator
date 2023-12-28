@@ -3,8 +3,7 @@ const stopwords = [
   'for', 'or', 'at', 'the', 'of', 'it', 'and', 'a', 'an', 'remote', 'year', 'to', 'is', 'in', 'i', 'as',
   'but', 'by', 'has', 'from', 'on', 'with', 'you', 'that', 'this', 'its', 's', 'n', 'not', ' this', 'be', 'which', 'use', 'each',
   'how', 'their', 'if', 'there', 'can', 'said', 'be',
-  /* add more stopwords if needed */
-];
+  //
 
 // Function to save word cloud data to chrome.storage.local
 function saveWordCloudData(wordList) {
