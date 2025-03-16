@@ -1,14 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>Word Cloud Generator</title>
 </head>
 <body>
-  <textarea id="textInput" placeholder="Paste your text here"></textarea>
-  <button id="generateBtn">Generate Word Cloud</button>
-  <div id="wordCloudContainer">
-    <canvas id="myCanvas" width="400" height="300"></canvas>
+  <div class="container">
+    <div class="input-section">
+      <div class="input-header">
+        <button id="grabTextBtn" class="action-button" title="Extract text from the current webpage" aria-label="Get text from current page">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" role="img">
+            <path d="M12 0H4a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V2a2 2 0 00-2-2zm-2 2v2H6V2h4zm2 12H4V2h1v3h6V2h1v12z"/>
+            <path d="M6 7h4v1H6zm0 2h4v1H6zm0 2h3v1H6z"/>
+          </svg>
+          Get Text from Current Page
+        </button>
+      </div>
+
+      <div class="text-input-container">
+        <textarea id="textInput" placeholder="Paste your text here or use the button above to get text from the current webpage..." aria-label="Text input for word cloud"></textarea>
+      </div>
+      
+      <div class="options-panel">
+        <div class="option-group">
+          <label for="colorScheme">Color Scheme:</label>
+          <select id="colorScheme" aria-label="Select color scheme">
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="purple">Purple</option>
+          </select>
+        </div>
+
+        <div class="option-group">
+          <label for="wordLimit">Word Limit:</label>
+          <select id="wordLimit" aria-label="Select word limit">
+            <option value="25">Top 25 words</option>
+            <option value="30" selected>Top 30 words</option>
+            <option value="50">Top 50 words</option>
+          </select>
+        </div>
+
+        <div class="option-group">
+          <label for="orientation">Orientation:</label>
+          <select id="orientation" aria-label="Select word cloud orientation">
+            <option value="horizontal">Horizontal</option>
+            <option value="square" selected>Square</option>
+            <option value="vertical">Vertical</option>
+          </select>
+        </div>
+
+        <div class="option-group">
+          <label for="backgroundColor">Background:</label>
+          <select id="backgroundColor" aria-label="Select background color">
+            <option value="transparent">Transparent</option>
+            <option value="white">White</option>
+            <option value="gray">Gray</option>
+            <option value="black">Black</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="action-section">
+        <div id="status" class="status-message" role="status" aria-live="polite"></div>
+        <div class="button-group">
+          <button id="generateBtn" class="primary-button">Generate Word Cloud</button>
+          <button id="downloadBtn" class="secondary-button">Save as PNG</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="wordCloudContainer" class="word-cloud-container" role="img" aria-label="Word cloud visualization">
+      <noscript>
+        <p class="error-message">JavaScript is required to generate word clouds. Please enable JavaScript in your browser.</p>
+      </noscript>
+    </div>
   </div>
+
   <script src="wordcloud2.js"></script>
   <script src="popup.js"></script>
 </body>

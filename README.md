@@ -1,3 +1,31 @@
-A word cloud is a visual representation of text data that displays words in different sizes. The more frequent a word appears in the source text, the larger it appears in the word cloud. Words are also arranged with some degree of randomness, clustered together in a shape reminiscent of a cloud. The color scheme can vary, but words are usually displayed in shades of a single color or a gradient. The goal of a word cloud is to quickly perceive the most prominent terms and themes in a body of text. It provides a visual overview of key words and concepts by emphasizing words that appear most often. The larger size draws the eye to the terms that are most frequent or significant in the text data. <br>
+# Word Cloud Generator
 
-<img width="488" alt="image" src="https://github.com/anti-racist/TinyTools_WordCloudGenerator/assets/68661808/bfadd249-3c7d-4bdc-aa80-3cd8cd392943">
+A Chrome extension that creates visual word clouds from webpage content or custom text. Perfect for quick text analysis and beautiful visualizations.
+
+## Features
+
+- Extract text from any webpage with one click
+- Paste your own text directly
+- Smart text processing (removes stop words, handles word variations)
+- Customizable colors (Blue, Green, Purple themes)
+- Adjustable word count (25-50 words)
+- Export as PNG image
+
+## Quick Start
+
+1. Click extension icon in Chrome toolbar
+2. Click "Get Text from Current Page" or paste your text
+3. Choose color scheme and word limit
+4. Click "Generate Word Cloud"
+5. Save your word cloud as PNG
+
+## Tips
+
+- Use on regular webpages (not chrome:// pages)
+- Longer texts create better word clouds
+- Adjust word limit for best visual results
+
+## Privacy & Security
+
+- All processing happens in your browser
+- No data collection or external servers
