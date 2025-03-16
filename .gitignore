@@ -1,5 +1,4 @@
-# Ignore all .png files
+# Ignore all .png files except icons
 *.png
-
-# Ignore the 'icons' directory
-icons/
+!icons/
+!icons/*.png
