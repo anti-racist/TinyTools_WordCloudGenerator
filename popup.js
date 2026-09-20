@@ -279,23 +279,18 @@ async function getPageText() {
     
     const [{result}] = await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      function: () => {
-        const scripts = document.getElementsByTagName('script');
-        const styles = document.getElementsByTagName('style');
-        for (const element of [...scripts, ...styles]) {
-          element.remove();
-        }
-        
-        return Array.from(document.body.getElementsByTagName('*'))
-          .map(element => {
-            const style = window.getComputedStyle(element);
-            const isHidden = style.display === 'none' || style.visibility === 'hidden';
-            return isHidden ? '' : element.textContent;
-          })
-          .join(' ')
-          .replace(/\s+/g, ' ')
-          .trim();
-      }
+      // innerText is already what the page renders: it leaves out script and
+      // style content, leaves out anything hidden, and returns each run of
+      // text once.
+      //
+      // The version this replaces deleted every <script> and <style> from the
+      // live page first. That did three things at once: it stripped the
+      // page's styling in front of the user, it made its own display:none
+      // test useless - with the stylesheet gone, class-hidden text reads as
+      // visible and lands in the cloud - and, by taking textContent off every
+      // element, it counted each word once per ancestor, so a word nested
+      // three deep weighed three times what it should.
+      function: () => document.body.innerText.replace(/\s+/g, ' ').trim()
     });
     
     if (!result) {
