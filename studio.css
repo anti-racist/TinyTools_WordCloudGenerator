@@ -1,0 +1,350 @@
+/* The studio. Three columns: where the text comes from, what it turned
+   into, and which words are in it.
+
+   The middle column is the only one that grows. The two panels beside it
+   are fixed, because both hold controls whose width is what makes them
+   readable, and a cloud is the only thing here that gets better with room. */
+
+html, body { height: 100%; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.bar {
+  flex-shrink: 0;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.bar h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Where the text came from, when it came from a page. Truncated rather
+   than wrapped: a long title must not push the cloud down the screen. */
+.source {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.source:empty { display: none; }
+
+.studio {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr) 300px;
+  gap: 16px;
+  padding: 16px 20px 20px;
+}
+
+.panel {
+  background: var(--mount);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+.panel h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.tally {
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #3f3d36;   /* 7.9:1 on 影青 - the muted token is for paper */
+}
+
+/* A word-sized action sitting in a panel heading. Not .secondary: that is
+   sized for the bottom of a panel, and an outlined pill beside a 12px
+   heading reads as the more important of the two.
+   The colour is the heading's own rather than 靛青, which measures 3.79:1
+   on 影青 and is below the floor for text. */
+.panel h2 .quiet {
+  margin-left: auto;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #3f3d36;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.panel h2 .quiet:hover { color: var(--ink); }
+
+/* An outlined button standing on a panel rather than on paper. 靛青 is the
+   accent everywhere else, but on 影青 it measures 3.79:1 - enough for the
+   border, which is a boundary, and not enough for the label, which is text.
+   青黛 is the next stop down the same ramp and reads as the same blue: 6.96:1
+   normal, 5.78:1 under tritanopia, its border 4.50:1. Only "Exclude" and "Put
+   every word back" are affected; "Save as PNG" stands on paper. */
+.panel .secondary {
+  color: #1a3a5f;
+  border-color: rgba(26, 58, 95, 0.8);
+}
+.panel .secondary:hover  { border-color: #1a3a5f; background: rgba(26, 58, 95, 0.06); }
+.panel .secondary:active { background: rgba(26, 58, 95, 0.12); }
+
+/* ---------- left: the text and the settings ---------- */
+
+#text {
+  flex: 1;
+  min-height: 140px;
+  resize: none;
+  background: var(--card);
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+::placeholder { color: var(--muted); opacity: 1; }
+
+.fields {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px 10px;
+}
+
+.fields label {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.fields select {
+  width: 100%;
+  background: var(--card);
+  border: none;
+  border-radius: 8px;
+  padding: 9px 10px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+/* ---------- middle: the cloud ---------- */
+
+.canvas-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+  min-width: 0;
+}
+
+.stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--hairline);
+  border-radius: 12px;
+  padding: 16px;
+  position: relative;
+}
+
+/* Hidden until there is something to draw, so the dashed frame is not
+   holding an empty white rectangle in the middle of the screen. */
+#canvas:not(.drawn) { display: none; }
+
+/* The pointer is the only thing that says the words can be clicked, so it
+   is set on the canvas rather than only on hover of a word - a word the
+   cursor is between should not flicker back to an arrow. */
+#canvas.drawn { cursor: pointer; }
+
+.empty {
+  margin: 0;
+  max-width: 34ch;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.stage-actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.stage-actions .status { flex: 1; min-width: 0; }
+.stage-actions .status:empty { display: block; }   /* holds the row's width */
+
+/* ---------- right: the words ---------- */
+
+.words {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+}
+
+/* The excluded list takes the height its contents need, up to a cap, and
+   the cloud's own list absorbs whatever is left. The other way round -
+   letting both shrink - squeezed the excluded list to a single clipped row
+   as soon as anything was in it, which is the one moment it has to be
+   readable. */
+#words    { flex: 1 1 0; min-height: 96px; }
+#excluded { flex: 0 0 auto; max-height: 22vh; }
+
+.words li {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  /* The ground is pale, so a card's edge comes from this ring rather than
+     from a brightness difference. */
+  box-shadow: 0 1px 2px rgba(34, 33, 28, 0.14), 0 0 0 1px rgba(34, 33, 28, 0.14);
+  border-radius: 8px;
+  padding: 5px 6px 5px 10px;
+  font-size: 14px;
+}
+
+.words .word {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.words .n {
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* The one control on a row. A cross removes, a plus puts back; both are
+   text glyphs for the same reason the status marks are. */
+.words button {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--muted);
+}
+.words button:hover { background: rgba(152, 30, 34, 0.10); color: var(--danger); }
+.excluded button:hover { background: rgba(22, 97, 171, 0.10); color: var(--dark); }
+
+.excluded li { opacity: 0.85; }
+.excluded .word { text-decoration: line-through; text-decoration-thickness: 1px; }
+
+.exclude-form {
+  display: flex;
+  gap: 6px;
+}
+.exclude-form input {
+  flex: 1;
+  min-width: 0;
+  background: var(--card);
+  border: none;
+  border-radius: 8px;
+  padding: 9px 10px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+}
+/* Smaller than a .secondary standing on its own, because it is one half
+   of a form row, but moved up with it so the row does not read as the
+   one control that was left behind. The input stretches to match. */
+.exclude-form button { padding: 9px 14px; font-size: 14px; }
+
+.note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #3f3d36;
+}
+
+/* ---------- the undo toast ---------- */
+
+/* Deleting is undoable for seven seconds, as it is in the rest of the
+   series. The toast is the only thing on screen that says so, so it is
+   placed where the eye already is - under the cloud, not in a corner. */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--dark);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 10px 12px 10px 16px;
+  font-size: 14px;
+  box-shadow: 0 6px 16px rgba(34, 33, 28, 0.28);
+  animation: rise 0.14s ease-out;
+}
+
+.toast button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 10px;
+}
+.toast button:hover { background: rgba(255, 255, 255, 0.14); }
+.toast button:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translate(-50%, 8px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Narrow windows: the word list drops under the cloud rather than being
+   squeezed to a width where the counts collide with the words. */
+@media (max-width: 1100px) {
+  .studio {
+    grid-template-columns: 300px minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+  .words-panel { grid-column: 1 / -1; }
+  #words, #excluded { max-height: 30vh; }
+}

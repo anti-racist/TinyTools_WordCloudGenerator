@@ -1,31 +1,36 @@
-# Word Cloud Generator
+## What's New in 2.0
 
-A Chrome extension that creates visual word clouds from webpage content or custom text. Perfect for quick text analysis and beautiful visualizations.
+- **Word Cloud Studio:** a full-page workspace with a much bigger preview. Open it from the toolbar icon.
+- **See every word:** a list shows each word in the cloud and how often it appears.
+- **Remove the words you don't want:** click × to drop a word, or add your own words to exclude. Put any of them back at any time.
+- **More ways to style it:** new colour schemes and backgrounds, circle and heart shapes, and word limits above 50.
 
-## Features
+## Key Features
 
-- Extract text from any webpage with one click
-- Paste your own text directly
-- Smart text processing (removes stop words, handles word variations)
-- Customizable colors (Blue, Green, Purple themes)
-- Adjustable word count (25-50 words)
-- Export as PNG image
+- Gets text from the page you're on, or works with text you paste in
+- Lets you choose the colours, shape, background, and number of words
+- Saves your word cloud as a PNG image
 
-## Quick Start
+## How to Use
 
-1. Click extension icon in Chrome toolbar
-2. Click "Get Text from Current Page" or paste your text
-3. Choose color scheme and word limit
-4. Click "Generate Word Cloud"
-5. Save your word cloud as PNG
+1. Click the Word Cloud icon in your toolbar:
+   - **Get text from this page** opens the studio with the text of the page you're on.
+   - **Open the studio** opens it empty, ready for you to paste your own text.
+2. Choose a colour scheme, word limit, shape, and background.
+3. Click **Generate word cloud**.
+4. In the word list, click × to remove a word, or type a word to exclude it. Click **Put every word back** to start over.
+5. Click **Save as PNG** to download your word cloud.
 
 ## Tips
 
-- Use on regular webpages (not chrome:// pages)
-- Longer texts create better word clouds
-- Adjust word limit for best visual results
+- Longer texts make better word clouds.
+- Circles and hearts look best with Top 75 words or more.
+- Get text from this page works on regular web pages, not on browser pages such as settings.
 
-## Privacy & Security
+## Privacy
 
-- All processing happens in your browser
-- No data collection or external servers
+We do not collect or store any user data. 
+
+## Compatibility
+
+Compatible with most Chromium-based browsers, including Google Chrome, Microsoft Edge and Vivaldi.

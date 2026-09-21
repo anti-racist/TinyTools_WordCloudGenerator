@@ -1,0 +1,126 @@
+/* Everything the popup and the studio are both built from: the colours, the
+   two buttons, the status line.
+
+   Every colour was measured against WCAG 2.2 and measured again under
+   simulated protanopia, deuteranopia and tritanopia. Before changing one,
+   re-measure: text needs 4.5:1, a control's own boundary needs 3:1, and the
+   measurement has to hold under all three simulations, not only normal
+   vision. The colours the CLOUD is drawn in live in src/palette.js and are
+   held to the same floor.
+
+   赤 is #981e22 rather than the #c3272b it is usually written as, because
+   #c3272b falls to 3.40:1 under tritanopia. */
+:root {
+  --paper:    #f7f4ed;  /* 鱼肚白 - the ground, as in the rest of the series */
+  --mount:    #bdcbd2;  /* 影青 - the panels. White cards sit 1.64:1 on it,
+                           which 1.4.11 asks nothing of because a card is not
+                           a control; the card's own ring is what separates
+                           it, so that ring is load-bearing. */
+  --card:     #ffffff;
+  --ink:      #22211c;  /* 14.63:1 on paper */
+  --muted:    #6b675c;  /* 5.11:1 on paper, 5.64:1 on card */
+  --dark:     #1661ab;  /* 靛青. White on it is 6.30:1, and it reads 5.74:1
+                           on paper. On 影青 it is only 3.79:1, which is
+                           enough for a border but not for text, so the
+                           outlined buttons that stand on a panel take 青黛
+                           instead - see .panel .secondary in studio.css. */
+  --success:  #2a6e3f;  /* 官绿 - white on it is 5.69:1 */
+  --danger:   #981e22;  /* 赤, darkened; white on it is 5.24:1 */
+  --notice:   #f7e8aa;  /* 杏仁黄; ink on it is 12.97:1 */
+  --hairline: #e2ddd0;
+}
+
+* { box-sizing: border-box; }
+
+/* Several rules below set `display`, which would otherwise beat the
+   browser's own rule for the hidden attribute. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* Visually hidden, still read aloud. */
+.vh {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 2px solid var(--dark);
+  outline-offset: 2px;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* The filled primary.
+
+   14px and 12px of padding put the box at 45px high. WCAG 2.2 asks 24x24 at
+   AA and 44x44 at AAA; the 13px version measured 39px, which cleared AA and
+   missed AAA by five pixels. A button is the whole of this popup, so it is
+   worth the higher figure. */
+.primary {
+  background: var(--dark);
+  color: #ffffff;
+  border: 1px solid var(--dark);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 16px;
+  transition: background-color 0.15s ease;
+}
+.primary:hover  { background: #12508c; border-color: #12508c; }
+.primary:active { background: #0f4275; border-color: #0f4275; }
+
+/* Outlined, for the quieter action beside it. The border carries the alpha
+   that measures 3.89:1 against the paper ground - it is what identifies the
+   control, so it cannot be spent down to the 3.0 floor. */
+.secondary {
+  background: transparent;
+  color: var(--dark);
+  border: 1px solid rgba(22, 97, 171, 0.8);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 16px;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.secondary:hover  { border-color: var(--dark); background: rgba(22, 97, 171, 0.06); }
+.secondary:active { background: rgba(22, 97, 171, 0.12); }
+
+.primary:disabled, .secondary:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Status line. The four tones are the series' four: 官绿 for something that
+   happened, 杏仁黄 for something that did not, 赤 for something that broke.
+   Every mark is a text glyph, never an emoji - a colour font draws its own
+   glyph and ignores the colour set here. */
+.status {
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 0;
+}
+.status:empty { display: none; }
+.status.success { background: var(--success); color: #ffffff; }
+.status.notice  { background: var(--notice);  color: var(--ink); }
+.status.error   { background: var(--danger);  color: #ffffff; }
+.status.success::before { content: "\2714"; font-weight: bold; }
+.status.notice::before  { content: "\24D8"; font-weight: bold; }
+.status.error::before   { content: "\2716"; font-weight: bold; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

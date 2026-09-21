@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Cloud Studio</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="studio.css">
+</head>
+<body>
+  <header class="bar">
+    <h1>Word Cloud Studio</h1>
+    <p id="source" class="source"></p>
+  </header>
+
+  <main class="studio">
+    <section class="panel" aria-labelledby="text-heading">
+      <h2 id="text-heading">Your text
+        <button id="clearText" class="quiet" type="button" hidden>Clear</button>
+      </h2>
+      <textarea id="text" aria-label="Text to build the cloud from"
+                placeholder="Paste your text here."></textarea>
+
+      <div class="fields">
+        <label for="scheme">Colour scheme</label>
+        <select id="scheme"></select>
+
+        <label for="limit">Word limit</label>
+        <select id="limit">
+          <option value="25">Top 25 words</option>
+          <option value="30">Top 30 words</option>
+          <option value="50">Top 50 words</option>
+          <option value="75">Top 75 words</option>
+          <option value="100">Top 100 words</option>
+        </select>
+
+        <label for="form">Shape</label>
+        <select id="form"></select>
+
+        <label for="ground">Background</label>
+        <select id="ground"></select>
+      </div>
+
+      <p id="shapeNote" class="note" hidden>A circle or a heart is carried by its smallest words. Try Top 75 or more.</p>
+
+      <button id="generate" class="primary" type="button">Generate word cloud</button>
+    </section>
+
+    <section class="canvas-panel" aria-labelledby="cloud-heading">
+      <h2 id="cloud-heading" class="vh">Cloud</h2>
+      <div id="stage" class="stage">
+        <canvas id="canvas" role="img" aria-label="Word cloud"></canvas>
+        <p id="empty" class="empty">Your word cloud will appear here.<br>Click any word to remove it.</p>
+      </div>
+      <div class="stage-actions">
+        <div id="status" class="status" role="status"></div>
+        <button id="save" class="secondary" type="button" disabled>Save as PNG</button>
+      </div>
+    </section>
+
+    <section class="panel words-panel" aria-labelledby="words-heading">
+      <h2 id="words-heading">Words shown <span id="wordCount" class="tally"></span></h2>
+      <ul id="words" class="words" aria-describedby="words-heading"></ul>
+
+      <h2 id="excluded-heading">Words excluded <span id="excludedCount" class="tally"></span></h2>
+      <form id="excludeForm" class="exclude-form">
+        <label for="excludeInput" class="vh">Type a word to exclude</label>
+        <input id="excludeInput" type="text" autocomplete="off" spellcheck="false"
+               placeholder="Type a word to exclude">
+        <button class="secondary" type="submit">Exclude</button>
+      </form>
+      <ul id="excluded" class="words excluded" aria-describedby="excluded-heading"></ul>
+      <button id="clearExcluded" class="secondary" type="button" hidden>Put every word back</button>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" hidden>
+    <span id="toastText"></span>
+    <button id="undo" type="button">Undo</button>
+  </div>
+
+  <script src="wordcloud2.js"></script>
+  <script type="module" src="studio.js"></script>
+</body>
+</html>

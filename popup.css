@@ -1,0 +1,15 @@
+/* The popup is an entrance, not a workbench.
+   Everything that makes a cloud lives in the studio, so nothing here needs
+   a second column or a preview to sit in. */
+body {
+  width: 320px;
+  padding: 16px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stack button { width: 100%; }
