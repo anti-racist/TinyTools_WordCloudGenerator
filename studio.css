@@ -76,7 +76,7 @@ body {
   font-weight: 500;
   letter-spacing: 0;
   text-transform: none;
-  color: #3f3d36;   /* 7.9:1 on 影青 - the muted token is for paper */
+  color: #3f3d36;   /* 6.5:1 on 影青 - the muted token is for paper */
 }
 
 /* A word-sized action sitting in a panel heading. Not .secondary: that is

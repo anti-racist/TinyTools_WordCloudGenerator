@@ -52,9 +52,32 @@ export async function loadSettings() {
 // One debounce per key, so a burst of exclusions and a burst of setting
 // changes do not cancel each other.
 const pending = new Map();
+const writes = new Map();
 function debounced(key, write, ms = 400) {
   clearTimeout(pending.get(key));
-  pending.set(key, setTimeout(() => { pending.delete(key); write(); }, ms));
+  writes.set(key, write);
+  pending.set(key, setTimeout(() => { pending.delete(key); writes.delete(key); write(); }, ms));
+}
+
+// Writes whatever is still waiting on its debounce, now. A tab is torn down
+// with its timers, so a word removed or a setting changed just before the
+// studio was closed was never saved. storage.sync.set is issued straight
+// away, so it goes out before the page does.
+function flushPending() {
+  for (const [key, timer] of pending) {
+    clearTimeout(timer);
+    const write = writes.get(key);
+    if (write) write();
+  }
+  pending.clear();
+  writes.clear();
+}
+
+if (typeof document !== 'undefined') {
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') flushPending();
+  });
+  addEventListener('pagehide', flushPending);
 }
 
 export function saveExcluded(set) {

@@ -31,6 +31,8 @@
 
 We do not collect or store any user data. 
 
+Full details: [privacy policy](PRIVACY.md).
+
 ## Compatibility
 
 Compatible with most Chromium-based browsers, including Google Chrome, Microsoft Edge and Vivaldi.
