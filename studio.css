@@ -291,6 +291,24 @@ body {
    one control that was left behind. The input stretches to match. */
 .exclude-form button { padding: 9px 14px; font-size: 14px; }
 
+/* A tip about the settings just chosen, in the same notice colours as the
+   status bar's notice (ink on notice is 12.97:1), so it reads as "look at
+   this" rather than as fine print. */
+.tip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--notice);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.tip[hidden] { display: none; }
+.tip::before { content: "\24D8"; font-weight: bold; }
+
 .note {
   margin: 0;
   font-size: 12px;

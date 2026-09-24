@@ -2,6 +2,8 @@
 
 - **Your settings are always saved.** A word you removed or a setting you changed just before closing the studio is now kept.
 - **Sharper icon** that fills its square, and now matches the one in the Chrome Web Store.
+- **Clearer tip for circle and heart shapes.** When a shape has too few words to show its outline, a tip now says so.
+- **No more warning on the Extensions page.** Chrome no longer lists a Canvas2D warning under Errors.
 
 ## Key Features
 

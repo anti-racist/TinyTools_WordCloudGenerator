@@ -113,7 +113,11 @@ export function draw(canvas, options) {
   // transparent ground step 3 is skipped and the hole stays transparent,
   // which is what its own background pixel is.
   const MASK = '#ff00ff';
-  const ctx = canvas.getContext('2d');
+  // Every render reads this canvas back (wordcloud2 scans it for free space),
+  // and Chrome logs a warning on the extension's Errors page from the second
+  // readback on unless the context is created for it. Only the first
+  // getContext() on a canvas sets this, and this is the first.
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
   if (!fitted) ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if (fitted) {
