@@ -63,6 +63,7 @@ function stageBox() {
 }
 
 function render() {
+  noteShape();
   if (!state.words.length) {
     canvas.classList.remove('drawn');
     emptyNote.hidden = false;
@@ -318,9 +319,14 @@ function fileName(title) {
 // stop when they run out, so a shape only reads once there are enough words
 // for the outline to be what stopped the cloud growing. Saying so beats
 // letting someone conclude the heart is broken.
+// A circle or a heart is drawn by its smallest words, and under 75 of them
+// the outline does not come through. That happens with a low Word limit or
+// with a page that simply has few words, so the cloud's own word count
+// decides. With no cloud there is nothing to advise on.
 function noteShape() {
   const shaped = formOf(state.settings.form).shape !== 'rectangle';
-  el('shapeNote').hidden = !(shaped && Number(state.settings.limit) < 75);
+  const words = state.words.length;
+  el('shapeNote').hidden = !(shaped && words > 0 && words < 75);
 }
 
 function fillSelect(select, entries, selected) {
