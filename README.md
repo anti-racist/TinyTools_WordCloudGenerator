@@ -1,9 +1,7 @@
-## What's New in 2.0
+## What's New in 2.0.1
 
-- **Word Cloud Studio:** a full-page workspace with a much bigger preview. Open it from the toolbar icon.
-- **See every word:** a list shows each word in the cloud and how often it appears.
-- **Remove the words you don't want:** click × to drop a word, or add your own words to exclude. Put any of them back at any time.
-- **More ways to style it:** new colour schemes and backgrounds, circle and heart shapes, and word limits above 50.
+- **Your settings are always saved.** A word you removed or a setting you changed just before closing the studio is now kept.
+- **Sharper icon** that fills its square, and now matches the one in the Chrome Web Store.
 
 ## Key Features
 
