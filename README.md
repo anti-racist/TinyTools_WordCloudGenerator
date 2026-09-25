@@ -18,7 +18,7 @@
 
 ## Privacy
 
-We do not collect any user data. Nothing you type is ever sent to us. Your settings and excluded words are stored by your browser and synced through your browser account.
+Nothing leaves your browser, and the extension has no server. Your settings and excluded words are stored by your browser and synced through your browser account.
 
 Full details: [privacy policy](PRIVACY.md).
 
