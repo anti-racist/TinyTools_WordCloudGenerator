@@ -1,6 +1,6 @@
 ## What's New in 2.0.1
 
-- **Your settings are always saved,** even a change made just before closing the studio.
+- Your settings are always saved, even if you close the studio right after changing them.
 
 ## Key Features
 
