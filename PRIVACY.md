@@ -6,7 +6,7 @@ Word Cloud Generator is a browser extension published by Maggie Mao.
 
 ## In short
 
-- Nothing leaves your browser. The extension has no server, no account,
+- The extension sends nothing anywhere. It has no server, no account,
   no analytics and no network code.
 - It reads a page's text only when you ask it to, and keeps your text and
   settings in your browser.
