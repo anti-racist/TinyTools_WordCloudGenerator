@@ -1,24 +1,24 @@
 ## What's New in 2.0.1
 
-- 🐛 Your settings and excluded words are always saved, even if you close the studio right after changing them.
+- 🐛 Settings and excluded words are now saved reliably, including changes made immediately before the studio is closed.
 
 ## Key Features
 
-- Gets text from the current web page, or works with text you paste in
-- Lists every word with its count, so you can remove the ones you don't want
-- Lets you choose the colours, background, shape and number of words
-- Saves your word cloud as a PNG image
+- Extracts text from the active web page, or accepts pasted text
+- Lists each word with its frequency, with the option to remove unwanted words
+- Customisable colour scheme, background, shape and word limit
+- Exports the word cloud as a PNG image
 
 ## How to Use
 
-1. Click the Word Cloud icon in your toolbar, then select **Get text from this page** or **Open the studio**.
-2. Choose a colour scheme, word limit, shape and background, then click **Generate word cloud**.
-3. In the word list, click × to remove a word, or type a word to exclude it.
-4. Click **Save as PNG** to download your word cloud.
+1. Click the Word Cloud icon in the toolbar, then select **Get text from this page** or **Open the studio**.
+2. Select a colour scheme, word limit, shape and background, then click **Generate word cloud**.
+3. To remove a word, click × in the word list; to exclude a word in advance, type it in.
+4. Click **Save as PNG** to download the word cloud.
 
 ## Privacy
 
-The extension sends nothing anywhere and has no server. Your settings and excluded words are stored by your browser and synced through your browser account.
+The extension sends no data anywhere and has no server. Settings and excluded words are stored by the browser and synced through the browser account.
 
 Full details: [privacy policy](PRIVACY.md).
 
