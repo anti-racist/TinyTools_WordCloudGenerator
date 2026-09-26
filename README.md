@@ -1,3 +1,7 @@
+Turn any web page or your own text into beautifully structured word clouds! Easily highlight the words that stand out, analyze word frequency, and present information in an engaging way.
+
+Whether you are building a presentation, analyzing text, or looking for a creative way to display data, this extension gives you professional results in seconds.
+
 ## What's New in 2.0.1
 
 - 🐛 Settings and excluded words are now saved reliably, including changes made immediately before the studio is closed.
